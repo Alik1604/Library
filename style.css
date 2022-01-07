@@ -1,0 +1,64 @@
+body{
+    background-color: rgb(165, 168, 168);
+    border-radius: 10px;
+}
+
+#header{
+    background-color: aquamarine;
+    height: 30px;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+#add_c{
+    display: flex;
+    justify-content: center;
+
+}
+
+#add_button{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    height: 50px;
+    width: 100px;
+}
+
+#library{
+    display: flex;
+    background-color: hotpink;
+    border-radius: 10px;
+    padding: 10px 10px 10px 5px;
+}
+
+.book_c{
+    background-color: grey;
+    border-radius: 5px;
+    margin-left: 5px;
+    padding: 5px;
+    max-width: 200px;
+    max-height: 150px;
+    min-width: 200px;
+    min-height: 150px;
+}
+
+.status{
+    background-color: green;
+    width: 25px;
+    height: 25px;
+  
+    
+}
+
+.star{
+    background-color: rgb(255, 252, 66);
+    width: 25px;
+    height: 25px;
+    margin-left: 5px;
+}
+
+.status_container{
+    justify-content: center;
+    flex-direction: row;
+    display: flex;
+    margin-top:10px;
+}
