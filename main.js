@@ -1,35 +1,34 @@
 const library_cont = document.querySelector("#library");
 let library = [];
 let counter = 0;
-function Book (title, author,numOfpages, status){
+function Book (title, author,numOfpages, status,fstatus){
     this.title = title
     this.author = author
     this.numOfpages = numOfpages
     this.status = status
-    this.info = function reportInfo(){
+    this.fstatus = fstatus
+    this.info = function reportInfo() {
         console.log(title,author,numOfpages,status);
     }
 }
 
-function addBookToLibraryArr (){
+function addBookToLibraryArr() {
     let title = prompt('Enter title',);
     let author = prompt('Enter author',);
     let numOfpages = prompt('Enter number of pages',);
     let status = prompt('Enter read status yes or no',);
-    library[counter] = new Book(title,author,numOfpages,status);
+    let fstatus = 'no';
+    library[counter] = new Book(title,author,numOfpages,status,fstatus);
     createCard(library[counter]);
-
     counter++;
 }
 
 const addButton = document.querySelector("#add_button");
 addButton.addEventListener('click',addBookToLibraryArr);
 
-
 //container for book 
-// let numOfCards = 0;
-// let library_cards = [];
-function createCard(book){
+
+function createCard(book) {
     const bookContainer = document.createElement('div');
     const delete_c = document.createElement('div');
     const delete_button = document.createElement('img');
@@ -63,6 +62,7 @@ function createCard(book){
     }else{
         readStatus.src = 'check_1.png';
     }
+
     bookContainer.append(delete_c);
     delete_c.append(delete_button);
     bookContainer.append(title);
@@ -72,35 +72,54 @@ function createCard(book){
     status_c.append(star);
     bookContainer.append(status_c);
     library_cont.append(bookContainer);
-
-    //numOfCards = library_cards.push(bookContainer);
-    //library_cards.forEach(card => card.addEventListener('click',);
         
     star.addEventListener('click', changeStar);
     readStatus.addEventListener('click', changeReadStatus);
+    delete_button.addEventListener('click',DeleteCard);
+}
 
+function DeleteCard(delete_button) {
+    let status_box = delete_button.target.parentElement;
+    let card = status_box.parentElement;
+    let book = library[card.getAttribute('value')];
+    let index = library.indexOf(book);
+    library.splice(index,1);
+    card.remove();
+    counter--;
+    let clipot = 0;
+    let cards = Array.from(document.querySelectorAll('.book_c'));
     
+    while(clipot < counter){
+        cards[clipot].setAttribute('value',clipot);
+        clipot++;
+    }
 }
 
-function changeReadStatus(readStatus){
-    readStatus.src = 'check.png';
-    console.log(readStatus.value);
+function changeReadStatus(readStatus) {
+    let status_box = readStatus.target.parentElement;
+    let parent = status_box.parentElement;
+    let book = library[parent.getAttribute('value')];
+    if (book.status == 'yes'){
+        readStatus.target.src = 'check_1.png';
+        book.status = 'no';
+    }else{
+        readStatus.target.src = 'check.png';
+        book.status = 'yes';
+    }
+    console.log(book);
 }
 
-function changeStar(star){
+function changeStar(star) {
     let status_box = star.target.parentElement;
     let parent = status_box.parentElement;
     let book = library[parent.getAttribute('value')];
-    console.log(book);
-
-    if (book.status == 'yes'){
+    if (book.fstatus == 'yes'){
         star.target.src = 'star.png';
-        book.status = 'no';
+        book.fstatus = 'no';
     }else{
         star.target.src = 'star_1.png';
-        book.status = 'yes';
+        book.fstatus = 'yes';
     }
-   
 } 
 
 
