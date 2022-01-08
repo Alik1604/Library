@@ -28,28 +28,35 @@ addButton.addEventListener('click',addBookToLibraryArr);
 
 function createCard(book){
     const bookContainer = document.createElement('div');
+    const delete_c = document.createElement('div');
+    const delete_button = document.createElement('img');
     const title = document.createElement('div');
     const author = document.createElement('div');
     const numOfpages = document.createElement('div');
     const status_c = document.createElement('div');
-    const star = document.createElement('div');
-    const readStatus = document.createElement('div');
+    const star = document.createElement('img');
+    const readStatus = document.createElement('img');
 
     bookContainer.classList.add('book_c');
     status_c.classList.add('status_container');
-    star.classList.add('status');
-    readStatus.classList.add('star');
+    readStatus.classList.add('status');
     star.classList.add('star');
+    delete_button.classList.add('del_button');
+    delete_c.classList.add('del_c');
+
+    star.src = 'star_1.png';
+    delete_button.src = 'close.png';
 
     title.textContent = book.title;
     author.textContent = book.author;
     numOfpages.textContent = book.numOfpages;
     if (book.status == 'yes'){
-        readStatus.style.backgroundColor = 'green';
+        readStatus.src = 'check.png';
     }else{
-        readStatus.style.backgroundColor = 'red';
+        readStatus.src = 'check_1.png';
     }
-
+    bookContainer.append(delete_c);
+    delete_c.append(delete_button);
     bookContainer.append(title);
     bookContainer.append(author);
     bookContainer.append(numOfpages);
