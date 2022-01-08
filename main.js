@@ -18,14 +18,17 @@ function addBookToLibraryArr (){
     let status = prompt('Enter read status yes or no',);
     library[counter] = new Book(title,author,numOfpages,status);
     createCard(library[counter]);
+
     counter++;
 }
 
 const addButton = document.querySelector("#add_button");
 addButton.addEventListener('click',addBookToLibraryArr);
 
-//container for book 
 
+//container for book 
+// let numOfCards = 0;
+// let library_cards = [];
 function createCard(book){
     const bookContainer = document.createElement('div');
     const delete_c = document.createElement('div');
@@ -44,7 +47,12 @@ function createCard(book){
     delete_button.classList.add('del_button');
     delete_c.classList.add('del_c');
 
-    star.src = 'star_1.png';
+    bookContainer.setAttribute('value',counter);
+    star.setAttribute('value',counter);
+    readStatus.setAttribute('value',counter);
+    delete_button.setAttribute('value',counter);
+
+    star.src = 'star.png';
     delete_button.src = 'close.png';
 
     title.textContent = book.title;
@@ -64,9 +72,35 @@ function createCard(book){
     status_c.append(star);
     bookContainer.append(status_c);
     library_cont.append(bookContainer);
-}
 
+    //numOfCards = library_cards.push(bookContainer);
+    //library_cards.forEach(card => card.addEventListener('click',);
+        
+    star.addEventListener('click', changeStar);
+    readStatus.addEventListener('click', changeReadStatus);
 
     
+}
+
+function changeReadStatus(readStatus){
+    readStatus.src = 'check.png';
+    console.log(readStatus.value);
+}
+
+function changeStar(star){
+    let status_box = star.target.parentElement;
+    let parent = status_box.parentElement;
+    let book = library[parent.getAttribute('value')];
+    console.log(book);
+
+    if (book.status == 'yes'){
+        star.target.src = 'star.png';
+        book.status = 'no';
+    }else{
+        star.target.src = 'star_1.png';
+        book.status = 'yes';
+    }
+   
+} 
 
 

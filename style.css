@@ -56,14 +56,14 @@ body{
 .star{
     width: 25px;
     height: 25px;
-    margin-left: 5px;
+    margin-left: 25px;
 }
 
 .status_container{
+    margin-top: 35px;
     justify-content: center;
     flex-direction: row;
     display: flex;
-    margin-top:10px;
 }
 
 .del_button{
