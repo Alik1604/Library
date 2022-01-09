@@ -46,11 +46,8 @@ body{
 }
 
 .status{
-   
     width: 25px;
     height: 25px;
-  
-    
 }
 
 .star{
@@ -69,10 +66,43 @@ body{
 .del_button{
     width: 10px;
     height: 10px;
-    
 }
 
 .del_c{
     display: flex;
     justify-content: flex-end;
 }
+
+.form_c{
+    margin: auto;
+    align-self: center; 
+    position: absolute;
+    margin-top: 200px;
+    display: flex;
+    flex-direction: column;
+    background-color: azure;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+
+body {
+    display:flex;
+    flex-direction: column;
+  }
+
+  input{
+      margin-top: 5px;
+  }
+
+  .sub_button{
+    margin-top: 5px;
+    height: 35px;
+    min-width: 50px;
+    align-self: center;
+  }
+
+  h5{
+      margin: 0px;
+      margin-top: 5px;
+  }

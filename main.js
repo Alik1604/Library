@@ -1,4 +1,6 @@
 const library_cont = document.querySelector("#library");
+const body_element = document.querySelector('body');
+
 let library = [];
 let counter = 0;
 function Book (title, author,numOfpages, status,fstatus){
@@ -12,19 +14,65 @@ function Book (title, author,numOfpages, status,fstatus){
     }
 }
 
-function addBookToLibraryArr() {
-    let title = prompt('Enter title',);
-    let author = prompt('Enter author',);
-    let numOfpages = prompt('Enter number of pages',);
-    let status = prompt('Enter read status yes or no',);
-    let fstatus = 'no';
+const form_cont = document.createElement('div');
+
+function makeForm() {
+    const title_input = document.createElement('input');
+    const title1 = document.createElement('h5');
+    const title2 = document.createElement('h5');
+    const title3 = document.createElement('h5');
+    const title4 = document.createElement('h5');
+    const title5 = document.createElement('h5');
+    const au_input = document.createElement('input');
+    const numOfpages_input = document.createElement('input')
+    const readStatus_input = document.createElement('input');
+    const fstatus_input = document.createElement('input');
+    const sub_button = document.createElement('button');
+
+    title1.textContent = 'Enter title';
+    title2.textContent = 'Enter author';
+    title3.textContent = 'Enter number of pages';
+    title4.textContent = 'Enter read status';
+    title5.textContent = 'Enter favourite status';
+
+    form_cont.append(title1);
+    form_cont.append(title_input);
+    form_cont.append(title2);
+    form_cont.append(au_input);
+    form_cont.append(title3);
+    form_cont.append(numOfpages_input);
+    form_cont.append(title4);
+    form_cont.append(readStatus_input);
+    form_cont.append(title5);
+    form_cont.append(fstatus_input);
+    form_cont.append(sub_button);
+    body_element.append(form_cont);
+
+    sub_button.classList.add('sub_button');
+    form_cont.classList.add('form_c');
+
+    sub_button.textContent = 'save book';
+    sub_button.addEventListener("click",removeFormandCallmaker);
+    addButton.disabled = 'true';
+}
+
+function removeFormandCallmaker() {
+    let formText = Array.from(document.querySelectorAll("input"));
+    let title = formText[0].value;
+    let author = formText[1].value;
+    let numOfpages = formText[2].value;
+    let status = formText[3].value;
+    let fstatus = formText[4].value;
     library[counter] = new Book(title,author,numOfpages,status,fstatus);
     createCard(library[counter]);
     counter++;
+    form_cont.innerHTML = '';
+    form_cont.remove();
+    addButton.removeAttribute('disabled');
 }
 
 const addButton = document.querySelector("#add_button");
-addButton.addEventListener('click',addBookToLibraryArr);
+addButton.addEventListener('click',makeForm);
 
 //container for book 
 
@@ -51,16 +99,23 @@ function createCard(book) {
     readStatus.setAttribute('value',counter);
     delete_button.setAttribute('value',counter);
 
-    star.src = 'star.png';
-    delete_button.src = 'close.png';
+    star.src = 'images/star.png';
+    delete_button.src = 'images/close.png';
 
     title.textContent = book.title;
     author.textContent = book.author;
     numOfpages.textContent = book.numOfpages;
+
     if (book.status == 'yes'){
-        readStatus.src = 'check.png';
+        readStatus.src = 'images/check.png';
     }else{
-        readStatus.src = 'check_1.png';
+        readStatus.src = 'images/check_1.png';
+    }
+
+    if (book.fstatus == 'yes'){
+        star.src = 'images/star_1.png';
+    }else{
+        star.src = 'images/star.png';
     }
 
     bookContainer.append(delete_c);
@@ -78,6 +133,8 @@ function createCard(book) {
     delete_button.addEventListener('click',DeleteCard);
 }
 
+//status buttons
+
 function DeleteCard(delete_button) {
     let status_box = delete_button.target.parentElement;
     let card = status_box.parentElement;
@@ -88,7 +145,6 @@ function DeleteCard(delete_button) {
     counter--;
     let clipot = 0;
     let cards = Array.from(document.querySelectorAll('.book_c'));
-    
     while(clipot < counter){
         cards[clipot].setAttribute('value',clipot);
         clipot++;
@@ -100,10 +156,10 @@ function changeReadStatus(readStatus) {
     let parent = status_box.parentElement;
     let book = library[parent.getAttribute('value')];
     if (book.status == 'yes'){
-        readStatus.target.src = 'check_1.png';
+        readStatus.target.src = 'images/check_1.png';
         book.status = 'no';
     }else{
-        readStatus.target.src = 'check.png';
+        readStatus.target.src = 'images/check.png';
         book.status = 'yes';
     }
     console.log(book);
@@ -114,10 +170,10 @@ function changeStar(star) {
     let parent = status_box.parentElement;
     let book = library[parent.getAttribute('value')];
     if (book.fstatus == 'yes'){
-        star.target.src = 'star.png';
+        star.target.src = 'images/star.png';
         book.fstatus = 'no';
     }else{
-        star.target.src = 'star_1.png';
+        star.target.src = 'images/star_1.png';
         book.fstatus = 'yes';
     }
 } 
