@@ -3,14 +3,18 @@ const body_element = document.querySelector('body');
 
 let library = [];
 let counter = 0;
-function Book (title, author,numOfpages, status,fstatus){
-    this.title = title
-    this.author = author
-    this.numOfpages = numOfpages
-    this.status = status
-    this.fstatus = fstatus
-    this.info = function reportInfo() {
-        console.log(title,author,numOfpages,status);
+
+class Book {
+    constructor(title, author,numOfpages, status,fstatus){
+        this.title = title
+        this.author = author
+        this.numOfpages = numOfpages
+        this.status = status
+        this.fstatus = fstatus
+    }
+
+    reportInfo() {
+        return {title : this.title, author : this.author,numOfpages : this.numOfpages,status : this.status, fstatus : this.fstatus};
     }
 }
 
@@ -74,8 +78,6 @@ function removeFormandCallmaker() {
 const addButton = document.querySelector("#add_button");
 addButton.addEventListener('click',makeForm);
 
-//container for book 
-
 function createCard(book) {
     const bookContainer = document.createElement('div');
     const delete_c = document.createElement('div');
@@ -133,8 +135,6 @@ function createCard(book) {
     delete_button.addEventListener('click',DeleteCard);
 }
 
-//status buttons
-
 function DeleteCard(delete_button) {
     let status_box = delete_button.target.parentElement;
     let card = status_box.parentElement;
@@ -162,7 +162,6 @@ function changeReadStatus(readStatus) {
         readStatus.target.src = 'images/check.png';
         book.status = 'yes';
     }
-    console.log(book);
 }
 
 function changeStar(star) {
